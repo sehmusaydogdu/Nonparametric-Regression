@@ -12,8 +12,6 @@ y_test <- as.matrix(data_y)[151:272,]
 bin_width <- 0.37
 origin    <- 1.5
 
-data_interval <- seq(from = min(x_train), to = max(x_train), by = 0.01)
-
 left_borders  <- seq(from = origin, to = max(x_train), by = bin_width)
 right_borders <- seq(from = origin+bin_width, to = max(x_train) + bin_width, by = bin_width)
 
@@ -41,8 +39,8 @@ for (b in 1:length(left_borders)) {
 
 y_test_prediction <- sapply(1:length(x_test), function(b) {p_head[((x_test[b] - origin) / bin_width) + 1]})
 
-rmse <- sqrt(sum((y_test - y_test_prediction)*(y_test - y_test_prediction)) / length(y_test))
-print(sprintf("Regressogram => RMSE is %g when h is %g", rmse ,bin_width))
+rmse_calculator <- sqrt(sum((y_test - y_test_prediction)*(y_test - y_test_prediction)) / length(y_test))
+print(sprintf("Regressogram => RMSE is %g when h is %g", rmse_calculator ,bin_width))
 
-###############################################################################################
+
 
